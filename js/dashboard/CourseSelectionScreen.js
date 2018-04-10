@@ -18,12 +18,8 @@ type State = {
   courseUrl: string,
 };
 
-export default class CoursesScreen extends React.Component<{}, State> {
+export default class CourseSelectionScreen extends React.Component<{}, State> {
   webView: WebView;
-
-  static onNavigationStateChange() {
-    console.warn('HAHAHAHA');
-  }
 
   constructor() {
     super();
@@ -65,7 +61,6 @@ export default class CoursesScreen extends React.Component<{}, State> {
         <WebView
           ref={(ref) => { this.webView = ref; }}
           source={{ uri: this.state.courseUrl }}
-          onNavigationStateChange={CoursesScreen.onNavigationStateChange}
           userAgent="Mozilla/5.0 (compatible; MSIE 10.0; Windows Phone 8.0; Trident/6.0; IEMobile/10.0; ARM; Touch; NOKIA; Lumia 920)"
         />
 
