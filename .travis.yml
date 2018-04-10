@@ -21,8 +21,8 @@ script:
 before_deploy:
 - cd $TRAVIS_BUILD_DIR/android/app/build/outputs/apk/release
 - export RELEASE_APK_FILE=$(ls *-release.apk)
-- jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore $TRAVIS_BUILD_DIR/memrise-creator-key.keystore
-  -storepass $storepass -keypass $keypass $RELEASE_APK_FILE memrise-creator-key
+- jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore $TRAVIS_BUILD_DIR/memrise-creator.keystore
+  -storepass $storepass -keypass $keypass $RELEASE_APK_FILE memrise-creator
 - jarsigner -verify $RELEASE_APK_FILE
 - $ANDROID_HOME/build-tools/26.0.2/zipalign -vf 4 $RELEASE_APK_FILE $HOME/$RELEASE_APK_FILE
 deploy:
