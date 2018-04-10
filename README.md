@@ -1,0 +1,1 @@
+# Memrise Creator &middot; [![Build Status](https://travis-ci.org/PatriceVignola/memrise-creator.svg?branch=master)](https://travis-ci.org/PatriceVignola/memrise-creator) [![Coverage Status](https://coveralls.io/repos/github/PatriceVignola/memrise-creator/badge.svg?branch=master)](https://coveralls.io/github/PatriceVignola/memrise-creator?branch=master)
