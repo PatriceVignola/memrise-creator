@@ -1,0 +1,41 @@
+language: android
+before_install:
+- openssl aes-256-cbc -K $encrypted_cc87a20f43aa_key -iv $encrypted_cc87a20f43aa_iv
+  -in memrise-creator.keystore.enc -out memrise-creator.keystore -d
+- nvm install 9.8
+- node --version
+- npm install -g yarn
+install:
+- yarn install
+android:
+  components:
+  - build-tools-26.0.2
+  - android-23
+  - addon-google_apis-google-23
+  - sys-img-armeabi-v7a-android-23
+script:
+- yarn validate
+- yarn test --coverage
+- yarn coveralls < coverage/lcov.info
+- cd android && ./gradlew assembleRelease
+before_deploy:
+- cd $TRAVIS_BUILD_DIR/android/app/build/outputs/apk/release
+- export RELEASE_APK_FILE=$(ls *-release.apk)
+- jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore $TRAVIS_BUILD_DIR/memrise-creator-key.keystore
+  -storepass $storepass -keypass $keypass $RELEASE_APK_FILE memrise-creator-key
+- jarsigner -verify $RELEASE_APK_FILE
+- $ANDROID_HOME/build-tools/26.0.2/zipalign -vf 4 $RELEASE_APK_FILE $HOME/$RELEASE_APK_FILE
+deploy:
+  skip_cleanup: true
+  provider: releases
+  api_key:
+    secure: Mi1rupLYg/iF2YB+KxB+SeLm4o+H85TXQaxLTXXgbYSQC9jdJu9HinU2lEmpJteqt03pJ9K8ZL3QtH9l70YgbbSA2q5OR41NAf4Maas77cQQemaZRWOVSRrDtPXXMt1C7uiYF2HV3ybOZM6ukEYeei0LIKh1IWzr/w+pPtwHAnR64mY6I9cM/z0pVX7yo+g91GRGQC0GHsAbIzIb/wmyRogDIC25ioWAReuUnjKAWtEfGPQJe/OQgB5Qjsok+0PbbhoorMNx50UT8LW2N4Mdq+L8PH/kwoVxIjbXNkkyq3YWHJO+d49j/8FK9V4/NkJ6i8Y2aZjZHfiswIlK7/13u+YCIjkdhveH/HAue1mFvI6iYW7yUVymK5eNBkuDUROG2YLyTC7HceAuNINeQOMAUR6Ns8RaYAujOVeqOhCtqcjNpkxbclsIUsCE77xseX3obThv1m+OQsAy7hHvA/RFlkiySsMT21R9x6El9uXeDxNrFDbSiF642fZAbjXY22sGmmKJxOCuVxIZvCgPJmFdatkktJ7pX57AHti5L8Hw9onfCYh1/fFaiAOd6oGTX0ogplhIizBjxfCRs3uWlnpr+HR9ERBMlahRen0i3yuhjQRO05bjHYmtl3nGYNoK/dd3432trHRtOFPypqzcuWu7dtVDPKttBWOLLFSPzJGAEQE=
+  file_glob: true
+  file: "$HOME/*-release.apk"
+  on:
+    repo: PatriceVignola/memrise-creator
+    tags: true
+env:
+  global:
+  - secure: EeLrTV+wFJelBz2A/ngRbXRnKto9zIuaxeIZpydUEHdMnxbo1gw3fFfgwk64Bi7h1MJYynFI7E0mCkLpEBcHS8USr/7d5Tt82CXUboxJKdIredfNFrXzeAYauWtaJpPn7BIGvlhz+MfjfE2IdF+mNNJYVUI3JfawT/wO5NozVIDMciZDJr54GNpOoH7dw15bhdks6f4pLmtmT+6VSJUsnKD033pLGDUJtewXapTCLjwD6ehc1dir49kT2hFd5KUKIKdSe+bUfzvnUE5meFVE9NtfVvEKU4+B/dUrSiREtkCxkEANEFXSfg1C+v9zJnNGRW1sr3N3EgnUX/L6pYKq13ZJjdaJzOUbdxqEzkjyTPCHCirtJMlAAd+Ow/aOYK8jdvJfi2J/62RurW91wrXDE5x3V3kLw7jBww4kxmGLoIv6a0jlId7n/WOXUOq/hHAZF51sXa0csKns7A1YWxXYTtxEL+QjeHpySU7Ijn0tL+sAL5XHvWrhE9sH6Hm2YR9UbLhjskQb5RGaqTA+1TwcFTxm57s1maC5GrGSnZgPOhuAkt2/J+D1Sz28w7UD9qMRogPyNuLTEtX7RJEPHCSpxNLoNb2d/AhiFiNUs8LeUNgRj4LBbzKOEo8wzwUdyTkYs9LwqwEhfWoNPHfp54pj8laNOOQno7mnIOIovSFnN3w=
+  - secure: uigsBShOuR1sKNL4HsBGXexmzt0M6hg/+q2OznZgPk1G5TqsBEA5RAgFaIdlzgO438nVLMsowmyfZZdYotsAqkfhGCBT6KHHEsnZZU9aqR2ZCXN4Lof+yxOA/nPIustxAyJhig0JyzrSbEH0oItlejwmnSL3HgUTY3L0aiSzoz2f3TQeLyndFm05M41kOLOX+dNUAY/yc9FRIhPCmEe6TcQV68JpFvexV5d3woHKD/tNAzGK2aNlxmQBCyUr8FYJQrFX2csOTXhl7TG2dhkSU0wz/YP+kJMv4PsIE4XP3jKZSYErqv8HLYC0US1lR/fErT99w2SNt1iTjidLw3oIs8NRJbx/0WW2tkQk5r2PJB+45Tivy9PhrYS5SRC5LRIj5jGuYYUSZxccsPmv1cPigwIOl2FuIv6WLyuckfO4VAP1xS7P2hqpkt8ND3u5aR7dALeHsaKegpNAhOC36EyyL+/VmsHmCHh3Ejjb03q8yr761WmkSjNDxy6AfcOt3xPOt50nUwzbpnkKT5r+F8sAMJ+Yyt2AJ7h+seSjVjWM+hdiFDRKwUoLfxMEclbo25UCRfW1GpTdJJ0FtPlerYJrI6zvbK2I/+254kBCCYkImzj1ZIakinIkqZIAnsPRbOITTVWaUrgp4OTudcjsgFPUPhmEEuNFagfFqDfCPrlj6fI=
