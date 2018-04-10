@@ -1,0 +1,111 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<View>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
+  >
+    Loading courses...
+  </Text>
+  <View
+    accessibilityComponentType="button"
+    accessibilityLabel={undefined}
+    accessibilityTraits={
+      Array [
+        "button",
+      ]
+    }
+    accessible={true}
+    collapsable={undefined}
+    hasTVPreferredFocus={undefined}
+    hitSlop={undefined}
+    isTVSelectable={true}
+    nativeID={undefined}
+    onLayout={undefined}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "opacity": 1,
+      }
+    }
+    testID={undefined}
+    tvParallaxProperties={undefined}
+  >
+    <View
+      style={
+        Array [
+          Object {},
+        ]
+      }
+    >
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        disabled={undefined}
+        ellipsizeMode="tail"
+        style={
+          Array [
+            Object {
+              "color": "#007AFF",
+              "fontSize": 18,
+              "padding": 8,
+              "textAlign": "center",
+            },
+          ]
+        }
+      >
+        ADD!
+      </Text>
+    </View>
+  </View>
+  <View
+    style={
+      Object {
+        "flex": 1,
+      }
+    }
+  >
+    <RCTWebView
+      allowsInlineMediaPlayback={undefined}
+      automaticallyAdjustContentInsets={undefined}
+      bounces={undefined}
+      contentInset={undefined}
+      dataDetectorTypes={undefined}
+      decelerationRate={undefined}
+      injectedJavaScript={undefined}
+      mediaPlaybackRequiresUserAction={undefined}
+      messagingEnabled={false}
+      onLoadingError={[Function]}
+      onLoadingFinish={[Function]}
+      onLoadingStart={[Function]}
+      onMessage={[Function]}
+      onShouldStartLoadWithRequest={undefined}
+      scalesPageToFit={true}
+      scrollEnabled={undefined}
+      source={
+        Object {
+          "uri": "https://www.memrise.com/course/1908937/test-korean-3/edit/#l_7094047",
+        }
+      }
+      style={
+        Array [
+          Object {
+            "flex": 1,
+          },
+          Object {
+            "backgroundColor": "#ffffff",
+          },
+          undefined,
+        ]
+      }
+    />
+  </View>
+</View>
+`;
