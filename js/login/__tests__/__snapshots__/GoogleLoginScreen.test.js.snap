@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Matches snapshot 1`] = `
+<WebView
+  onNavigationStateChange={[Function]}
+  scalesPageToFit={true}
+  source={
+    Object {
+      "uri": "https://www.memrise.com/accounts/login/google-oauth2/",
+    }
+  }
+  userAgent="Mozilla/5.0 (compatible; Trident/6.0; ARM; Touch)"
+/>
+`;

@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Matches snapshot 1`] = `
+<withTheme(Card)>
+  <CardContent>
+    <Title>
+      Course
+    </Title>
+  </CardContent>
+  <withTheme(CardCover)
+    source={
+      Object {
+        "uri": "Course Photo Url",
+      }
+    }
+  />
+  <CardActions>
+    <withTheme(Button)>
+      Cancel
+    </withTheme(Button)>
+    <withTheme(Button)>
+      OK
+    </withTheme(Button)>
+  </CardActions>
+</withTheme(Card)>
+`;

@@ -1,0 +1,49 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Matches snapshot 1`] = `
+<FlatList
+  data={
+    Array [
+      Object {
+        "description": "Course Description",
+        "id": 1,
+        "name": "Course",
+        "numLearners": 1,
+        "numLevels": 1,
+        "numWords": 1,
+        "photoUrl": "Course Photo Url",
+        "slug": "Course Slug",
+        "source": Object {
+          "id": 1,
+          "index": 1,
+          "languageCode": "Language Code",
+          "name": "Language",
+          "parentId": 1,
+          "photoUrl": "Language Photo Url",
+          "slug": "Language Slug",
+        },
+        "target": Object {
+          "id": 1,
+          "index": 1,
+          "languageCode": "Language Code",
+          "name": "Language",
+          "parentId": 1,
+          "photoUrl": "Language Photo Url",
+          "slug": "Language Slug",
+        },
+      },
+    ]
+  }
+  disableVirtualization={false}
+  horizontal={false}
+  initialNumToRender={10}
+  keyExtractor={[Function]}
+  maxToRenderPerBatch={10}
+  numColumns={1}
+  onEndReachedThreshold={2}
+  renderItem={[Function]}
+  scrollEventThrottle={50}
+  updateCellsBatchingPeriod={50}
+  windowSize={21}
+/>
+`;
