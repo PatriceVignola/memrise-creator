@@ -19,6 +19,9 @@
 ; Ignore metro
 .*/node_modules/metro/.*
 
+; Ignore react-native-paper since their flow files are throwing errors
+.*/node_modules/react-native-paper/.*
+
 [include]
 
 [libs]

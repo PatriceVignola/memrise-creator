@@ -17,6 +17,8 @@
   "dependencies": {
     "react": "16.3.1",
     "react-native": "0.55.2",
+    "react-native-paper": "^1.2.6",
+    "react-native-vector-icons": "^4.6.0",
     "react-navigation": "^1.5.11",
     "react-redux": "^5.0.7",
     "redux": "^3.7.2",
@@ -30,6 +32,7 @@
     "coveralls": "^3.0.0",
     "eslint": "^4.19.1",
     "eslint-config-airbnb": "^16.1.0",
+    "eslint-plugin-flowtype": "^2.46.1",
     "eslint-plugin-import": "^2.10.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^7.7.0",
@@ -42,6 +45,8 @@
   },
   "jest": {
     "preset": "react-native",
-    "transformIgnorePatterns": ["node_modules/(?!react-native|react-navigation)/"]
+    "transformIgnorePatterns": [
+      "node_modules/(?!react-native|react-navigation)/"
+    ]
   }
 }
