@@ -2,21 +2,24 @@
 
 import React from 'react';
 import { Button } from 'react-native';
-import { NavigationActions } from 'react-navigation';
+import {
+  type NavigationScreenProp,
+  NavigationActions,
+} from 'react-navigation';
 import loginWithGoogle from '../actions/login';
 
 type Props = {
-  navigation: Object,
+  navigation: NavigationScreenProp<any>,
 };
 
 export default class LoginScreen extends React.Component<Props> {
   constructor(props: Props) {
     super(props);
 
-    (this: any).onGoogleLoginPress = this.onGoogleLoginPress.bind(this);
+    this.onGoogleLoginPress = this.onGoogleLoginPress.bind(this);
   }
 
-  onGoogleLoginPress() {
+  onGoogleLoginPress = () => {
     this.props.navigation.dispatch(NavigationActions.reset({
       index: 0,
       actions: [NavigationActions.navigate({ routeName: 'GoogleLogin' })],

@@ -1,22 +1,29 @@
+/* @flow */
+
 import React from 'react';
 import { Provider } from 'react-redux';
-import { createStore, applyMiddleware } from 'redux';
+import {
+  type Store,
+  createStore,
+  applyMiddleware,
+} from 'redux';
 import thunk from 'redux-thunk';
 import { StackNavigator } from 'react-navigation';
 import reducers from './reducers';
 import LoginScreen from './login/LoginScreen';
 import GoogleLoginScreen from './login/GoogleLoginScreen';
-import CourseSelectionScreen from './dashboard/CourseSelectionScreen';
+import ConnectedCourseSelectionScreen from './courses/CourseSelectionScreen';
+import type { Action } from './actions/types';
 
 const initialState = {};
 const MemriseCreator = StackNavigator({
   Login: { screen: LoginScreen },
   GoogleLogin: { screen: GoogleLoginScreen },
-  CourseSelection: { screen: CourseSelectionScreen },
+  CourseSelection: { screen: ConnectedCourseSelectionScreen },
 });
 
-export default class App extends React.Component<{}> {
-  store: any;
+class App extends React.Component<{}> {
+  store: Store<Object, Action>;
 
   constructor() {
     super();
@@ -36,3 +43,5 @@ export default class App extends React.Component<{}> {
     );
   }
 }
+
+export default App;

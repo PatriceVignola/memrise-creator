@@ -1,6 +1,8 @@
+/* @flow */
+
 import type { Action } from '../actions/types';
 
-export type State = {
+export type User = {
   isLoggedIn: boolean,
   id: ?string,
   name: ?string,
@@ -12,7 +14,7 @@ const initialState = {
   name: null,
 };
 
-function user(state: State = initialState, action: Action): State {
+function user(state: User = initialState, action: Action): User {
   if (action.type === 'LOGGED_IN') {
     return {
       isLoggedIn: true,
