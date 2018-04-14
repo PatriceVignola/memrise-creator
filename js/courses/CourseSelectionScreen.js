@@ -20,7 +20,6 @@ type State = {
 // Name-export the unconnected component for tests
 export class CourseSelectionScreen extends React.Component<Props> {
   componentDidMount() {
-    console.warn('did mount');
     this.props.dispatch(fetchCoursesAsync());
   }
 
