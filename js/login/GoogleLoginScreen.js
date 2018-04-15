@@ -6,7 +6,7 @@ import {
   type NavigationScreenProp,
   NavigationActions,
 } from 'react-navigation';
-import Url from 'url-parse';
+import URL, { type Url } from 'url-parse';
 import loginWithGoogle from '../actions/login';
 
 const googleLoginUrl = 'https://www.memrise.com/accounts/login/google-oauth2/';
@@ -26,15 +26,14 @@ export default class GoogleLoginScreen extends React.Component<Props> {
   constructor(props: Props) {
     super(props);
 
-    this.redirectUrl = null;
     this.onNavigationStateChange = this.onNavigationStateChange.bind(this);
   }
 
   onNavigationStateChange = (e: StateChangeData) => {
-    const url = new Url(e.url, true);
+    const url = new URL(e.url, true);
 
     if (url.query.redirect_uri) {
-      this.redirectUrl = new Url(url.query.redirect_uri);
+      this.redirectUrl = new URL(url.query.redirect_uri);
     } else if (this.redirectUrl && url.pathname === this.redirectUrl.pathname) {
       loginWithGoogle();
 
