@@ -1,3 +1,6 @@
+// flow-typed signature: 07a2eb886d10cf8034bdac06431b5f65
+// flow-typed version: ad6c27f80a/url-parse_v1.3.x/flow_>=v0.59.x
+
 declare module 'url-parse' {
   declare export type Url = {
     protocol: string,
