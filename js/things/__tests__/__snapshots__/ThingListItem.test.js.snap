@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ThingListItem renders a thing 1`] = `
+<withTheme(ListItem)
+  description="abc"
+  onPress={[Function]}
+  title="abc"
+/>
+`;

@@ -1,7 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Matches snapshot 1`] = `
-<withTheme(Card)>
+exports[`CourseCard shows course info 1`] = `
+<withTheme(Card)
+  onPress={[Function]}
+>
   <CardContent>
     <Title>
       Course

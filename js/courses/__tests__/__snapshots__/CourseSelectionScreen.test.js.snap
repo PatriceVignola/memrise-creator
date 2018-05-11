@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Matches snapshot 1`] = `
+exports[`CourseSelectionScreen renders courses 1`] = `
 <FlatList
   data={
     Array [

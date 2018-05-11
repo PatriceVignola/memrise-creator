@@ -1,12 +1,16 @@
 /* @flow */
 
 import React from 'react';
+import { addNavigationHelpers } from 'react-navigation';
+import Renderer from 'react-test-renderer';
 import ShallowRenderer from 'react-test-renderer/shallow';
+
+import CourseCard from '../CourseCard';
 import { CourseSelectionScreen } from '../CourseSelectionScreen';
 
-const renderer = new ShallowRenderer();
+const shallowRenderer = new ShallowRenderer();
 
-test('Matches snapshot', () => {
+describe('CourseSelectionScreen', () => {
   const language = {
     id: 1,
     slug: 'Language Slug',
@@ -30,11 +34,44 @@ test('Matches snapshot', () => {
     target: language,
   };
 
-  const result = renderer.render((
-    <CourseSelectionScreen
-      dispatch={jest.fn()}
-      courses={[course]}
-    />
-  ));
-  expect(result).toMatchSnapshot();
+  const mockNavigateFunction = jest.fn();
+  const navigation = addNavigationHelpers({
+    state: {
+      key: 'key',
+      routeName: 'routeName',
+      path: 'path',
+    },
+    dispatch: jest.fn(),
+  });
+
+  navigation.navigate = mockNavigateFunction;
+
+  test('renders courses', () => {
+    const shallow = shallowRenderer.render((
+      <CourseSelectionScreen
+        navigation={navigation}
+        courses={[course]}
+        fetchCurrentUser={jest.fn()}
+        fetchCourses={jest.fn()}
+      />
+    ));
+    expect(shallow).toMatchSnapshot();
+  });
+
+  test('navigates to CourseEditScreen when clicking a course card', () => {
+    const deep = Renderer.create((
+      <CourseSelectionScreen
+        navigation={navigation}
+        courses={[course]}
+        fetchCurrentUser={jest.fn()}
+        fetchCourses={jest.fn()}
+      />
+    ));
+
+    deep.root.findByType(CourseCard).props.onPress(course);
+    expect(mockNavigateFunction).toHaveBeenCalledTimes(1);
+    expect(mockNavigateFunction).toHaveBeenCalledWith('CourseEdit', {
+      course,
+    });
+  });
 });

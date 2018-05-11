@@ -2,23 +2,27 @@
 
 import React from 'react';
 import { Provider } from 'react-redux';
+
 import {
   type Store,
   createStore,
   applyMiddleware,
 } from 'redux';
+
 import thunk from 'redux-thunk';
 import { StackNavigator } from 'react-navigation';
+import type { Action } from './actions/types';
 import reducers from './reducers';
 import LoginScreen from './login/LoginScreen';
 import GoogleLoginScreen from './login/GoogleLoginScreen';
 import ConnectedCourseSelectionScreen from './courses/CourseSelectionScreen';
-import type { Action } from './actions/types';
+import ConnectedCourseEditScreen from './courses/CourseEditScreen';
 
 const initialState = {};
 const MemriseCreator = StackNavigator({
   Login: { screen: LoginScreen },
   GoogleLogin: { screen: GoogleLoginScreen },
+  CourseEdit: { screen: ConnectedCourseEditScreen },
   CourseSelection: { screen: ConnectedCourseSelectionScreen },
 });
 

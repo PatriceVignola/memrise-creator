@@ -2,11 +2,12 @@
 
 import React from 'react';
 import ShallowRenderer from 'react-test-renderer/shallow';
+
 import CourseCard from '../CourseCard';
 
-const renderer = new ShallowRenderer();
+const shallowRenderer = new ShallowRenderer();
 
-test('Matches snapshot', () => {
+describe('CourseCard', () => {
   const language = {
     id: 1,
     slug: 'Language Slug',
@@ -30,10 +31,21 @@ test('Matches snapshot', () => {
     target: language,
   };
 
-  const result = renderer.render((
+  const mockPressFunction = jest.fn();
+
+  const wrapper = shallowRenderer.render((
     <CourseCard
       course={course}
+      onPress={mockPressFunction}
     />
   ));
-  expect(result).toMatchSnapshot();
+
+  test('shows course info', () => {
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  test('can be clicked', () => {
+    wrapper.props.onPress();
+    expect(mockPressFunction).toHaveBeenCalled();
+  });
 });

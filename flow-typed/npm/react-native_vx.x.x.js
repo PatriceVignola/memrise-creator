@@ -703,11 +703,11 @@ declare module 'react-native/Libraries/Components/ViewPager/ViewPagerAndroid.ios
 }
 
 declare module 'react-native/Libraries/Components/WebView/WebView.android' {
-  declare module.exports: number;
+  declare module.exports: any;
 }
 
 declare module 'react-native/Libraries/Components/WebView/WebView.ios' {
-  declare module.exports: string;
+  declare module.exports: any;
 }
 
 declare module 'react-native/Libraries/Core/__mocks__/ErrorUtils' {

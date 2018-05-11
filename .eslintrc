@@ -1,12 +1,18 @@
 {
   "parser": "babel-eslint",
-  "extends": ["airbnb", "plugin:react-native/all", "plugin:flowtype/recommended"],
+  "extends": [
+    "airbnb",
+    "plugin:react-native/all",
+    "plugin:flowtype/recommended",
+    "plugin:jest/recommended",
+  ],
   "plugins": [
     "react",
     "react-native",
     "jsx-a11y",
     "import",
     "flowtype",
+    "jest",
   ],
   "env": {
     "react-native/react-native": true,
@@ -26,5 +32,7 @@
         "render",
       ],
     }],
+    "no-useless-computed-key": [0],
+    "quote-props": [0],
   },
 }

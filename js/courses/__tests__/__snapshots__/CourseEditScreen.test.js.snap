@@ -1,0 +1,81 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CourseEditScreen with a course parameter renders a list of things for the course 1`] = `
+<Component
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <FlatList
+    data={
+      Array [
+        Object {
+          "id": 1,
+          "source": Object {
+            "alts": Array [
+              "def",
+            ],
+            "kind": "text",
+            "word": "abc",
+          },
+          "target": Object {
+            "alts": Array [
+              "def",
+            ],
+            "kind": "text",
+            "word": "abc",
+          },
+        },
+      ]
+    }
+    disableVirtualization={false}
+    horizontal={false}
+    initialNumToRender={10}
+    keyExtractor={[Function]}
+    maxToRenderPerBatch={10}
+    numColumns={1}
+    onEndReachedThreshold={2}
+    renderItem={[Function]}
+    scrollEventThrottle={50}
+    updateCellsBatchingPeriod={50}
+    windowSize={21}
+  />
+  <withTheme(FAB)
+    icon="add"
+    onPress={[Function]}
+    style={
+      Object {
+        "bottom": 16,
+        "position": "absolute",
+        "right": 16,
+      }
+    }
+  />
+  <WebView
+    scalesPageToFit={true}
+    source={
+      Object {
+        "uri": "https://memrise.com/course/1/Course Slug/edit",
+      }
+    }
+    style={
+      Object {
+        "display": "none",
+      }
+    }
+    userAgent="Mozilla/5.0 (compatible; MSIE 10.0; Windows Phone 8.0; Trident/6.0; IEMobile/10.0; ARM; Touch; NOKIA; Lumia 920)"
+  />
+</Component>
+`;
+
+exports[`CourseEditScreen without a course parameter shows a loading screen 1`] = `
+<Text
+  accessible={true}
+  allowFontScaling={true}
+  ellipsizeMode="tail"
+>
+  Loading...
+</Text>
+`;

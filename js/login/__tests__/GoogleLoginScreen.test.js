@@ -1,22 +1,86 @@
 /* @flow */
 
 import React from 'react';
-import { addNavigationHelpers } from 'react-navigation';
+import { addNavigationHelpers, NavigationActions } from 'react-navigation';
+import { WebView } from 'react-native';
+import Renderer from 'react-test-renderer';
 import ShallowRenderer from 'react-test-renderer/shallow';
+
 import GoogleLoginScreen from '../GoogleLoginScreen';
+import type { StateChangeData } from '../GoogleLoginScreen';
 
-const renderer = new ShallowRenderer();
+const shallowRenderer = new ShallowRenderer();
 
-test('Matches snapshot', () => {
+describe('GoogleLoginScreen', () => {
+  const mockDispatchFunction = jest.fn();
+
   const navigation = addNavigationHelpers({
-    state: {},
-    dispatch: jest.fn(),
+    state: {
+      key: 'key',
+      routeName: 'routeName',
+      path: 'path',
+    },
+    dispatch: mockDispatchFunction,
   });
 
-  const result = renderer.render((
-    <GoogleLoginScreen
-      navigation={navigation}
-    />
-  ));
-  expect(result).toMatchSnapshot();
+  afterEach(() => {
+    mockDispatchFunction.mockClear();
+  });
+
+  test('renders the Google Login Screen', () => {
+    const shallow = shallowRenderer.render((
+      <GoogleLoginScreen
+        navigation={navigation}
+      />
+    ));
+    expect(shallow).toMatchSnapshot();
+  });
+
+  test('navigates to CourseSelectionScreen after redirecting', () => {
+    const mockResetObject = NavigationActions.reset({
+      index: 0,
+      actions: [NavigationActions.navigate({ routeName: 'CourseSelection' })],
+    });
+
+    const deep = Renderer.create((
+      <GoogleLoginScreen
+        navigation={navigation}
+      />
+    ));
+
+    const mockStateChangeUrl: StateChangeData = {
+      url: 'https://url.com?redirect_uri=https://url.com/redirect_path',
+    };
+
+    const mockStateChangeRedirect: StateChangeData = {
+      url: 'https://url.com/redirect_path',
+    };
+
+    deep.root.findByType(WebView).props.onNavigationStateChange(mockStateChangeUrl);
+    deep.root.findByType(WebView).props.onNavigationStateChange(mockStateChangeRedirect);
+
+    expect(mockDispatchFunction).toHaveBeenCalledTimes(1);
+    expect(mockDispatchFunction).toHaveBeenCalledWith(mockResetObject);
+  });
+
+  test('does not redirect if the redirect url is not equal to redirect_uri', () => {
+    const deep = Renderer.create((
+      <GoogleLoginScreen
+        navigation={navigation}
+      />
+    ));
+
+    const mockStateChangeUrl: StateChangeData = {
+      url: 'https://url.com?redirect_uri=https://url.com/redirect_path',
+    };
+
+    const mockStateChangeBadRedirect: StateChangeData = {
+      url: 'https://url.com/bad_redirect_path',
+    };
+
+    deep.root.findByType(WebView).props.onNavigationStateChange(mockStateChangeUrl);
+    deep.root.findByType(WebView).props.onNavigationStateChange(mockStateChangeBadRedirect);
+
+    expect(mockDispatchFunction).toHaveBeenCalledTimes(0);
+  });
 });

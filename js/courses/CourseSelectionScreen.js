@@ -3,24 +3,32 @@
 import React from 'react';
 import { FlatList } from 'react-native';
 import { connect } from 'react-redux';
-import fetchCoursesAsync from '../actions/fetchApi';
-import type { Course } from '../reducers/courses';
-import type { Action } from '../actions/types';
+import type { NavigationScreenProp, NavigationRoute } from 'react-navigation';
+
 import CourseCard from './CourseCard';
+import { fetchCoursesAsync, fetchCurrentUserAsync } from '../actions/fetchApi';
+import { getCourses } from '../store/selectors';
+import type { Course, ThunkAction } from '../actions/types';
+import type { State } from '../store/selectors';
 
 type Props = {
-  courses: Course[],
-  dispatch: ((Action => void) => Promise<Action>) => void,
-};
-
-type State = {
-  courses: Course[],
+  courses: [Course],
+  fetchCurrentUser: () => ThunkAction,
+  fetchCourses: () => ThunkAction,
+  navigation: NavigationScreenProp<NavigationRoute>,
 };
 
 // Name-export the unconnected component for tests
 export class CourseSelectionScreen extends React.Component<Props> {
-  componentDidMount() {
-    this.props.dispatch(fetchCoursesAsync());
+  constructor(props: Props) {
+    super(props);
+
+    props.fetchCurrentUser();
+    props.fetchCourses();
+  }
+
+  onCourseCardPress = (course: Course) => {
+    this.props.navigation.navigate('CourseEdit', { course });
   }
 
   render() {
@@ -28,18 +36,21 @@ export class CourseSelectionScreen extends React.Component<Props> {
       // TODO: Put loading gif while the courses are loading
       <FlatList
         data={this.props.courses}
-        renderItem={(info: { item: Course }) => (
-          <CourseCard course={info.item} />
+        renderItem={({ item }) => (
+          <CourseCard
+            course={item}
+            onPress={this.onCourseCardPress}
+          />
         )}
+        keyExtractor={item => item.toString()}
       />
     );
   }
 }
 
-function mapStateToProps(state: State) {
-  return {
-    courses: state.courses,
-  };
-}
-
-export default connect(mapStateToProps)(CourseSelectionScreen);
+export default connect((state: State) => ({
+  courses: getCourses(state),
+}), {
+  fetchCourses: fetchCoursesAsync,
+  fetchCurrentUser: fetchCurrentUserAsync,
+})(CourseSelectionScreen);

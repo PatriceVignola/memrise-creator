@@ -1,31 +1,28 @@
 /* @flow */
 
 import React from 'react';
+import { NavigationActions } from 'react-navigation';
 import { Button } from 'react-native';
-import {
-  type NavigationScreenProp,
-  NavigationActions,
-} from 'react-navigation';
-import loginWithGoogle from '../actions/login';
+import type { NavigationScreenProp, NavigationRoute } from 'react-navigation';
 
 type Props = {
-  navigation: NavigationScreenProp<any>,
+  navigation: NavigationScreenProp<NavigationRoute>,
 };
 
 export default class LoginScreen extends React.Component<Props> {
+  handleGoogleLoginPress: () => void;
+
   constructor(props: Props) {
     super(props);
 
-    this.onGoogleLoginPress = this.onGoogleLoginPress.bind(this);
+    this.handleGoogleLoginPress = this.handleGoogleLoginPress.bind(this);
   }
 
-  onGoogleLoginPress = () => {
+  handleGoogleLoginPress() {
     this.props.navigation.dispatch(NavigationActions.reset({
       index: 0,
       actions: [NavigationActions.navigate({ routeName: 'GoogleLogin' })],
     }));
-
-    loginWithGoogle();
   }
 
   render() {
@@ -33,7 +30,7 @@ export default class LoginScreen extends React.Component<Props> {
       // TODO: Add the google logo
       // TODO: Style the button according to the guidelines
       // https://developers.google.com/identity/branding-guidelines#g+signin-social-scopes
-      <Button onPress={this.onGoogleLoginPress} title="Sign in with Google" />
+      <Button onPress={this.handleGoogleLoginPress} title="Sign in with Google" />
     );
   }
 }
