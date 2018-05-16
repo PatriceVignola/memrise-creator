@@ -1,7 +1,7 @@
 /* @flow */
 
-import user from '../user';
-import type { User } from '../../actions/types';
+import user from './user';
+import type { User } from '../actions/types';
 
 describe('user reucer', () => {
   const mockUser: User = {

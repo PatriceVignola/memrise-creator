@@ -1,7 +1,7 @@
 /* @flow */
 
-import courses from '../courses';
-import type { Course } from '../../actions/types';
+import courses from './courses';
+import type { Course } from '../actions/types';
 
 describe('courses reducer', () => {
   const mockCourses: Course[] = [{

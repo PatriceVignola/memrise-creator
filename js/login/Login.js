@@ -9,7 +9,7 @@ type Props = {
   navigation: NavigationScreenProp<NavigationRoute>,
 };
 
-export default class LoginScreen extends React.Component<Props> {
+export default class Login extends React.Component<Props> {
   handleGoogleLoginPress: () => void;
 
   constructor(props: Props) {

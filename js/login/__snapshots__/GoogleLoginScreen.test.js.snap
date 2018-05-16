@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`GoogleLoginScreen renders the Google Login Screen 1`] = `
+exports[`GoogleLogin renders the Google Login 1`] = `
 <WebView
   onNavigationStateChange={[Function]}
   scalesPageToFit={true}

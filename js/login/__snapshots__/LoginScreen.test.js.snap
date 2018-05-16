@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`LoginScreen renders a login page 1`] = `
+exports[`Login renders a login page 1`] = `
 <Button
   onPress={[Function]}
   title="Sign in with Google"

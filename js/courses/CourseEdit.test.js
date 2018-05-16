@@ -7,8 +7,8 @@ import { addNavigationHelpers } from 'react-navigation';
 import { WebView } from 'react-native';
 import { FAB } from 'react-native-paper';
 
-import { CourseEditScreen } from '../CourseEditScreen';
-import ThingListItem from '../../things/ThingListItem';
+import { CourseEditScreen } from './CourseEdit';
+import ThingListItem from '../things/ThingListItem';
 
 describe('CourseEditScreen', () => {
   const shallowRenderer = new ShallowRenderer();

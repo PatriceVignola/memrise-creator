@@ -5,7 +5,7 @@ import { ListItem } from 'react-native-paper';
 import Renderer from 'react-test-renderer';
 import ShallowRenderer from 'react-test-renderer/shallow';
 
-import ThingListItem from '../ThingListItem';
+import ThingListItem from './ThingListItem';
 
 const shallowRenderer = new ShallowRenderer();
 

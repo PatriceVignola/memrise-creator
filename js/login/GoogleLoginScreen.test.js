@@ -6,12 +6,12 @@ import { WebView } from 'react-native';
 import Renderer from 'react-test-renderer';
 import ShallowRenderer from 'react-test-renderer/shallow';
 
-import GoogleLoginScreen from '../GoogleLoginScreen';
-import type { StateChangeData } from '../GoogleLoginScreen';
+import GoogleLogin from './GoogleLogin';
+import type { StateChangeData } from './GoogleLogin';
 
 const shallowRenderer = new ShallowRenderer();
 
-describe('GoogleLoginScreen', () => {
+describe('GoogleLogin', () => {
   const mockDispatchFunction = jest.fn();
 
   const navigation = addNavigationHelpers({
@@ -27,23 +27,23 @@ describe('GoogleLoginScreen', () => {
     mockDispatchFunction.mockClear();
   });
 
-  test('renders the Google Login Screen', () => {
+  test('renders the Google Login', () => {
     const shallow = shallowRenderer.render((
-      <GoogleLoginScreen
+      <GoogleLogin
         navigation={navigation}
       />
     ));
     expect(shallow).toMatchSnapshot();
   });
 
-  test('navigates to CourseSelectionScreen after redirecting', () => {
+  test('navigates to CourseList after redirecting', () => {
     const mockResetObject = NavigationActions.reset({
       index: 0,
-      actions: [NavigationActions.navigate({ routeName: 'CourseSelection' })],
+      actions: [NavigationActions.navigate({ routeName: 'CourseList' })],
     });
 
     const deep = Renderer.create((
-      <GoogleLoginScreen
+      <GoogleLogin
         navigation={navigation}
       />
     ));
@@ -65,7 +65,7 @@ describe('GoogleLoginScreen', () => {
 
   test('does not redirect if the redirect url is not equal to redirect_uri', () => {
     const deep = Renderer.create((
-      <GoogleLoginScreen
+      <GoogleLogin
         navigation={navigation}
       />
     ));

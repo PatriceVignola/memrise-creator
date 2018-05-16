@@ -6,9 +6,9 @@ import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import ShallowRenderer from 'react-test-renderer/shallow';
 
-import ConnectedCourseEditScreen from '../CourseEditScreen';
+import ConnectedCourseList from './CourseList';
 
-describe('CourseEditScreen', () => {
+describe('ConnectedCourseList', () => {
   const language = {
     id: 1,
     slug: 'Language Slug',
@@ -19,7 +19,7 @@ describe('CourseEditScreen', () => {
     languageCode: 'Language Code',
   };
 
-  const course = {
+  const courses = [{
     description: 'Course Description',
     id: 1,
     name: 'Course',
@@ -30,21 +30,7 @@ describe('CourseEditScreen', () => {
     slug: 'Course Slug',
     source: language,
     target: language,
-  };
-
-  const thingLanguage = {
-    word: 'abc',
-    kind: 'text',
-    alts: ['def'],
-  };
-
-  const coursesThings = {
-    [course.id]: [{
-      id: 1,
-      source: thingLanguage,
-      target: thingLanguage,
-    }],
-  };
+  }];
 
   const shallowRenderer = new ShallowRenderer();
 
@@ -53,24 +39,21 @@ describe('CourseEditScreen', () => {
       key: 'key',
       routeName: 'routeName',
       path: 'path',
-      params: {
-        course,
-      },
     },
     dispatch: jest.fn(),
   });
 
   describe('connected with a store', () => {
     const mockStore = configureStore([thunk]);
-    const store = mockStore({ coursesThings });
+    const store = mockStore({ courses });
 
     const connectedShallow = shallowRenderer.render((
       // $FlowFixMe Fixed in higher flow versions (e.g. 0.71.x), but react-native is still in 0.67
-      <ConnectedCourseEditScreen store={store} navigation={navigation} />
+      <ConnectedCourseList store={store} navigation={navigation} />
     ));
 
     test('has props that match the store\'s initial state', () => {
-      expect(connectedShallow.props.coursesThings).toEqual(coursesThings);
+      expect(connectedShallow.props.courses).toEqual(courses);
     });
   });
 });

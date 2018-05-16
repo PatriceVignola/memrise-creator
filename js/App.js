@@ -13,17 +13,17 @@ import thunk from 'redux-thunk';
 import { StackNavigator } from 'react-navigation';
 import type { Action } from './actions/types';
 import reducers from './reducers';
-import LoginScreen from './login/LoginScreen';
-import GoogleLoginScreen from './login/GoogleLoginScreen';
-import ConnectedCourseSelectionScreen from './courses/CourseSelectionScreen';
-import ConnectedCourseEditScreen from './courses/CourseEditScreen';
+import Login from './login/Login';
+import GoogleLogin from './login/GoogleLogin';
+import ConnectedCourseList from './courses/CourseList';
+import ConnectedCourseEdit from './courses/CourseEdit';
 
 const initialState = {};
 const MemriseCreator = StackNavigator({
-  Login: { screen: LoginScreen },
-  GoogleLogin: { screen: GoogleLoginScreen },
-  CourseEdit: { screen: ConnectedCourseEditScreen },
-  CourseSelection: { screen: ConnectedCourseSelectionScreen },
+  Login: { screen: Login },
+  GoogleLogin: { screen: GoogleLogin },
+  CourseEdit: { screen: ConnectedCourseEdit },
+  CourseList: { screen: ConnectedCourseList },
 });
 
 class App extends React.Component<{}> {

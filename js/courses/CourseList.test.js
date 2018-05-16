@@ -1,16 +1,15 @@
 /* @flow */
 
 import React from 'react';
-import { addNavigationHelpers } from 'react-navigation';
 import Renderer from 'react-test-renderer';
 import ShallowRenderer from 'react-test-renderer/shallow';
 
-import CourseCard from '../CourseCard';
-import { CourseSelectionScreen } from '../CourseSelectionScreen';
+import CourseCard from './CourseCard';
+import { CourseList } from './CourseList';
 
 const shallowRenderer = new ShallowRenderer();
 
-describe('CourseSelectionScreen', () => {
+describe('CourseList', () => {
   const language = {
     id: 1,
     slug: 'Language Slug',
@@ -34,22 +33,12 @@ describe('CourseSelectionScreen', () => {
     target: language,
   };
 
-  const mockNavigateFunction = jest.fn();
-  const navigation = addNavigationHelpers({
-    state: {
-      key: 'key',
-      routeName: 'routeName',
-      path: 'path',
-    },
-    dispatch: jest.fn(),
-  });
-
-  navigation.navigate = mockNavigateFunction;
+  const mockEditCourseFunction = jest.fn();
 
   test('renders courses', () => {
     const shallow = shallowRenderer.render((
-      <CourseSelectionScreen
-        navigation={navigation}
+      <CourseList
+        editCourse={jest.fn()}
         courses={[course]}
         fetchCurrentUser={jest.fn()}
         fetchCourses={jest.fn()}
@@ -60,8 +49,8 @@ describe('CourseSelectionScreen', () => {
 
   test('navigates to CourseEditScreen when clicking a course card', () => {
     const deep = Renderer.create((
-      <CourseSelectionScreen
-        navigation={navigation}
+      <CourseList
+        editCourse={mockEditCourseFunction}
         courses={[course]}
         fetchCurrentUser={jest.fn()}
         fetchCourses={jest.fn()}
@@ -69,9 +58,7 @@ describe('CourseSelectionScreen', () => {
     ));
 
     deep.root.findByType(CourseCard).props.onPress(course);
-    expect(mockNavigateFunction).toHaveBeenCalledTimes(1);
-    expect(mockNavigateFunction).toHaveBeenCalledWith('CourseEdit', {
-      course,
-    });
+    expect(mockEditCourseFunction).toHaveBeenCalledTimes(1);
+    expect(mockEditCourseFunction).toHaveBeenCalledWith(course);
   });
 });

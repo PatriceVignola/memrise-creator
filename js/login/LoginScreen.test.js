@@ -4,11 +4,11 @@ import React from 'react';
 import { addNavigationHelpers, NavigationActions } from 'react-navigation';
 import Renderer from 'react-test-renderer';
 import ShallowRenderer from 'react-test-renderer/shallow';
-import LoginScreen from '../LoginScreen';
+import Login from './Login';
 
 const shallowRenderer = new ShallowRenderer();
 
-describe('LoginScreen', () => {
+describe('Login', () => {
   const mockDispatchFunction = jest.fn();
 
   const navigation = addNavigationHelpers({
@@ -22,21 +22,21 @@ describe('LoginScreen', () => {
 
   test('renders a login page', () => {
     const shallow = shallowRenderer.render((
-      <LoginScreen
+      <Login
         navigation={navigation}
       />
     ));
     expect(shallow).toMatchSnapshot();
   });
 
-  test('navigates to GoogleLoginScreen when clicking a course card', () => {
+  test('navigates to GoogleLogin when clicking a course card', () => {
     const mockResetObject = NavigationActions.reset({
       index: 0,
       actions: [NavigationActions.navigate({ routeName: 'GoogleLogin' })],
     });
 
     const deep = Renderer.create((
-      <LoginScreen
+      <Login
         navigation={navigation}
       />
     ));

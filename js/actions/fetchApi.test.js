@@ -7,7 +7,7 @@ import {
   fetchCoursesAsync,
   fetchThingsAsync,
   fetchCurrentUserAsync,
-} from '../fetchApi';
+} from './fetchApi';
 
 import type {
   ApiCourses,
@@ -15,13 +15,13 @@ import type {
   ApiThings,
   ApiUser,
   ApiLeaderboard,
-} from '../apiTypes';
+} from './apiTypes';
 
 import type {
   Course,
   CoursesThings,
   User,
-} from '../types';
+} from './types';
 
 const mockStore = configureStore([thunk]);
 

@@ -22,7 +22,7 @@ export type StateChangeData = {
   url: string,
 };
 
-export default class GoogleLoginScreen extends React.Component<Props> {
+export default class GoogleLogin extends React.Component<Props> {
   redirectUrl: ?Url;
 
   constructor(props: Props) {
@@ -39,7 +39,7 @@ export default class GoogleLoginScreen extends React.Component<Props> {
     } else if (this.redirectUrl && url.pathname === this.redirectUrl.pathname) {
       this.props.navigation.dispatch(NavigationActions.reset({
         index: 0,
-        actions: [NavigationActions.navigate({ routeName: 'CourseSelection' })],
+        actions: [NavigationActions.navigate({ routeName: 'CourseList' })],
       }));
     }
   }

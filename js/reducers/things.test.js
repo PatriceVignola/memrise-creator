@@ -1,7 +1,7 @@
 /* @flow */
 
-import things from '../things';
-import type { CoursesThings } from '../../actions/types';
+import things from './things';
+import type { CoursesThings } from '../actions/types';
 
 describe('things reducer', () => {
   const mockCoursesThings: CoursesThings = {

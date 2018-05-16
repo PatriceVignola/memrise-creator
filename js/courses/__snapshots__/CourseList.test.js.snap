@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`CourseSelectionScreen renders courses 1`] = `
+exports[`CourseList renders courses 1`] = `
 <FlatList
   data={
     Array [

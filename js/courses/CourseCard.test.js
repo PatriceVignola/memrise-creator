@@ -3,7 +3,7 @@
 import React from 'react';
 import ShallowRenderer from 'react-test-renderer/shallow';
 
-import CourseCard from '../CourseCard';
+import CourseCard from './CourseCard';
 
 const shallowRenderer = new ShallowRenderer();
 
