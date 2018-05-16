@@ -1,9 +1,26 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ThingListItem renders a thing 1`] = `
-<withTheme(ListItem)
-  description="abc"
+<ThingListItem
   onPress={[Function]}
-  title="abc"
+  thing={
+    Object {
+      "id": 1,
+      "source": Object {
+        "alts": Array [
+          "def",
+        ],
+        "kind": "text",
+        "word": "abc",
+      },
+      "target": Object {
+        "alts": Array [
+          "def",
+        ],
+        "kind": "text",
+        "word": "abc",
+      },
+    }
+  }
 />
 `;

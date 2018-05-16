@@ -11,40 +11,39 @@ import {
   Button,
 } from 'react-native-paper';
 
+import { withHandlers } from 'recompose';
+
 import type { Course } from '../actions/types';
 
-type Props = {
+type HigherOrderProps = {
   course: Course,
   onPress: (course: Course) => void,
 };
 
-class CourseCard extends React.Component<Props> {
-  onPress: () => void;
+type Props = {
+  course: Course,
+  onPress: () => void,
+};
 
-  constructor(props: Props) {
-    super(props);
-
-    this.onPress = this.onPress.bind(this);
-  }
-
-  onPress() {
-    this.props.onPress(this.props.course);
-  }
-
-  render() {
-    return (
-      <Card onPress={this.onPress}>
-        <CardContent>
-          <Title>{this.props.course.name}</Title>
-        </CardContent>
-        <CardCover source={{ uri: this.props.course.photoUrl }} />
-        <CardActions>
-          <Button>Cancel</Button>
-          <Button>OK</Button>
-        </CardActions>
-      </Card>
-    );
-  }
+function CourseCard(props: Props) {
+  return (
+    <Card onPress={props.onPress}>
+      <CardContent>
+        <Title>{props.course.name}</Title>
+      </CardContent>
+      <CardCover source={{ uri: props.course.photoUrl }} />
+      <CardActions>
+        <Button>Cancel</Button>
+        <Button>OK</Button>
+      </CardActions>
+    </Card>
+  );
 }
 
-export default CourseCard;
+const enhance = withHandlers({
+  onPress: (props: HigherOrderProps) => () => {
+    props.onPress(props.course);
+  },
+});
+
+export default enhance(CourseCard);

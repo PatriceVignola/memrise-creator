@@ -1,28 +1,37 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`CourseCard shows course info 1`] = `
-<withTheme(Card)
-  onPress={[Function]}
->
-  <CardContent>
-    <Title>
-      Course
-    </Title>
-  </CardContent>
-  <withTheme(CardCover)
-    source={
-      Object {
-        "uri": "Course Photo Url",
-      }
+<CourseCard
+  course={
+    Object {
+      "description": "Course Description",
+      "id": 1,
+      "name": "Course",
+      "numLearners": 1,
+      "numLevels": 1,
+      "numWords": 1,
+      "photoUrl": "Course Photo Url",
+      "slug": "Course Slug",
+      "source": Object {
+        "id": 1,
+        "index": 1,
+        "languageCode": "Language Code",
+        "name": "Language",
+        "parentId": 1,
+        "photoUrl": "Language Photo Url",
+        "slug": "Language Slug",
+      },
+      "target": Object {
+        "id": 1,
+        "index": 1,
+        "languageCode": "Language Code",
+        "name": "Language",
+        "parentId": 1,
+        "photoUrl": "Language Photo Url",
+        "slug": "Language Slug",
+      },
     }
-  />
-  <CardActions>
-    <withTheme(Button)>
-      Cancel
-    </withTheme(Button)>
-    <withTheme(Button)>
-      OK
-    </withTheme(Button)>
-  </CardActions>
-</withTheme(Card)>
+  }
+  onPress={[Function]}
+/>
 `;
