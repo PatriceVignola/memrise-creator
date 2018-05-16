@@ -3,10 +3,12 @@
 import React from 'react';
 import { addNavigationHelpers } from 'react-navigation';
 import configureStore from 'redux-mock-store';
-import thunk from 'redux-thunk';
+import Renderer from 'react-test-renderer';
 import ShallowRenderer from 'react-test-renderer/shallow';
+import thunk from 'redux-thunk';
 
-import ConnectedCourseList from './CourseList';
+import ConnectedCourseList from './ConnectedCourseList';
+import CourseList from './CourseList';
 
 describe('ConnectedCourseList', () => {
   const language = {
@@ -43,17 +45,28 @@ describe('ConnectedCourseList', () => {
     dispatch: jest.fn(),
   });
 
-  describe('connected with a store', () => {
-    const mockStore = configureStore([thunk]);
-    const store = mockStore({ courses });
+  const mockStore = configureStore([thunk]);
+  const store = mockStore({ courses });
 
-    const connectedShallow = shallowRenderer.render((
-      // $FlowFixMe Fixed in higher flow versions (e.g. 0.71.x), but react-native is still in 0.67
+  test('has props that match the store\'s initial state', () => {
+    const shallow = shallowRenderer.render((
       <ConnectedCourseList store={store} navigation={navigation} />
     ));
 
-    test('has props that match the store\'s initial state', () => {
-      expect(connectedShallow.props.courses).toEqual(courses);
-    });
+    expect(shallow.props.courses).toEqual(courses);
+  });
+
+  test('has handler props', () => {
+    const mockNavigateFunction = jest.fn();
+    navigation.navigate = mockNavigateFunction;
+
+    const deep = Renderer.create((
+      <ConnectedCourseList store={store} navigation={navigation} />
+    ));
+
+    deep.root.findByType(CourseList).props.editCourse(courses[0]);
+
+    expect(mockNavigateFunction).toHaveBeenCalledTimes(1);
+    expect(mockNavigateFunction).toBeCalledWith('CourseEdit', { course: courses[0] });
   });
 });

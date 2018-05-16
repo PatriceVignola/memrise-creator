@@ -15,15 +15,15 @@ import type { Action } from './actions/types';
 import reducers from './reducers';
 import Login from './login/Login';
 import GoogleLogin from './login/GoogleLogin';
-import ConnectedCourseList from './courses/CourseList';
+import ConnectedCourseList from './courses/ConnectedCourseList';
 import ConnectedCourseEdit from './courses/CourseEdit';
 
 const initialState = {};
 const MemriseCreator = StackNavigator({
   Login: { screen: Login },
   GoogleLogin: { screen: GoogleLogin },
-  CourseEdit: { screen: ConnectedCourseEdit },
   CourseList: { screen: ConnectedCourseList },
+  CourseEdit: { screen: ConnectedCourseEdit },
 });
 
 class App extends React.Component<{}> {

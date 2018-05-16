@@ -5,7 +5,7 @@ import Renderer from 'react-test-renderer';
 import ShallowRenderer from 'react-test-renderer/shallow';
 
 import CourseCard from './CourseCard';
-import { CourseList } from './CourseList';
+import CourseList from './CourseList';
 
 const shallowRenderer = new ShallowRenderer();
 
